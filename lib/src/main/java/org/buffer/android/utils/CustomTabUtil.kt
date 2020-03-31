@@ -3,11 +3,10 @@ package org.buffer.android.utils
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
+import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 
@@ -17,9 +16,9 @@ object CustomTabUtil {
         context: Context,
         uri: Uri,
         @ColorRes color: Int,
-        @DrawableRes backArrow: Int
+        closeBitmap: Bitmap
     ) {
-        val intent = buildIntent(context, uri, color, backArrow)
+        val intent = buildIntent(context, uri, color, closeBitmap)
         try {
             context.startActivity(intent)
         } catch (error: ActivityNotFoundException) {
@@ -35,17 +34,12 @@ object CustomTabUtil {
         context: Context,
         uri: Uri,
         @ColorRes color: Int,
-        @DrawableRes backArrow: Int
+        closeBitmap: Bitmap
     ): Intent {
         val customTabsIntent = CustomTabsIntent.Builder()
             .setToolbarColor(ContextCompat.getColor(context, color))
             .setShowTitle(true)
-            .setCloseButtonIcon(
-                BitmapFactory.decodeResource(
-                    context.resources,
-                    backArrow
-                )
-            )
+            .setCloseButtonIcon(closeBitmap)
             .addDefaultShareMenuItem()
             .build()
         return customTabsIntent.intent.apply {
