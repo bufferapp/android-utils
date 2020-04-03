@@ -31,7 +31,7 @@ publish {
     userOrg = 'buffer'
     groupId = 'org.buffer.android'
     artifactId = 'android-utils'
-    publishVersion = '0.6'
+    publishVersion = '0.7'
     desc = 'An Android library for frequently used utility functions'
     website = 'https://github.com/bufferapp/android-utils'
 }
